@@ -18,6 +18,11 @@ const requestHandler = (req, res) => {
     }
     if (url === '/create-user' && method === 'POST') {
         const body = [];
+        req.on('error', (err) => {
+            console.error(err);
+            res.statusCode = 400;
+            res.end();
+        })
         req.on('data', username => {
             body.push(username);
         });
